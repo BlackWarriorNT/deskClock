@@ -63,9 +63,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _00 {
+        internal static byte[] yandex0 {
             get {
-                object obj = ResourceManager.GetObject("_00", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex0", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _01 {
+        internal static byte[] yandex1 {
             get {
-                object obj = ResourceManager.GetObject("_01", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex1", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _02 {
+        internal static byte[] yandex10 {
             get {
-                object obj = ResourceManager.GetObject("_02", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex10", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _03 {
+        internal static byte[] yandex11 {
             get {
-                object obj = ResourceManager.GetObject("_03", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex11", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _04 {
+        internal static byte[] yandex12 {
             get {
-                object obj = ResourceManager.GetObject("_04", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex12", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _05 {
+        internal static byte[] yandex13 {
             get {
-                object obj = ResourceManager.GetObject("_05", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex13", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -123,9 +123,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _06 {
+        internal static byte[] yandex14 {
             get {
-                object obj = ResourceManager.GetObject("_06", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex14", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -133,9 +133,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _07 {
+        internal static byte[] yandex15 {
             get {
-                object obj = ResourceManager.GetObject("_07", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex15", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -143,9 +143,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _08 {
+        internal static byte[] yandex16 {
             get {
-                object obj = ResourceManager.GetObject("_08", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex16", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -153,9 +153,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _09 {
+        internal static byte[] yandex17 {
             get {
-                object obj = ResourceManager.GetObject("_09", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex17", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -163,9 +163,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _10 {
+        internal static byte[] yandex18 {
             get {
-                object obj = ResourceManager.GetObject("_10", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex18", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -173,9 +173,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _11 {
+        internal static byte[] yandex19 {
             get {
-                object obj = ResourceManager.GetObject("_11", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex19", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -183,9 +183,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _12 {
+        internal static byte[] yandex2 {
             get {
-                object obj = ResourceManager.GetObject("_12", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex2", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -193,9 +193,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _13 {
+        internal static byte[] yandex20 {
             get {
-                object obj = ResourceManager.GetObject("_13", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex20", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -203,9 +203,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _14 {
+        internal static byte[] yandex21 {
             get {
-                object obj = ResourceManager.GetObject("_14", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex21", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -213,9 +213,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _15 {
+        internal static byte[] yandex22 {
             get {
-                object obj = ResourceManager.GetObject("_15", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex22", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -223,9 +223,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _16 {
+        internal static byte[] yandex23 {
             get {
-                object obj = ResourceManager.GetObject("_16", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex23", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -233,9 +233,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _17 {
+        internal static byte[] yandex3 {
             get {
-                object obj = ResourceManager.GetObject("_17", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex3", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -243,9 +243,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _18 {
+        internal static byte[] yandex4 {
             get {
-                object obj = ResourceManager.GetObject("_18", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex4", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -253,9 +253,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _19 {
+        internal static byte[] yandex5 {
             get {
-                object obj = ResourceManager.GetObject("_19", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex5", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -263,9 +263,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _20 {
+        internal static byte[] yandex6 {
             get {
-                object obj = ResourceManager.GetObject("_20", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex6", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -273,9 +273,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _21 {
+        internal static byte[] yandex7 {
             get {
-                object obj = ResourceManager.GetObject("_21", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex7", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -283,9 +283,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _22 {
+        internal static byte[] yandex8 {
             get {
-                object obj = ResourceManager.GetObject("_22", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex8", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -293,9 +293,9 @@ namespace deskClock.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] _23 {
+        internal static byte[] yandex9 {
             get {
-                object obj = ResourceManager.GetObject("_23", resourceCulture);
+                object obj = ResourceManager.GetObject("yandex9", resourceCulture);
                 return ((byte[])(obj));
             }
         }

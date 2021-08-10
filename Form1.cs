@@ -40,133 +40,142 @@ namespace deskClock
             timer.Start();
         }
 
-        private void sayTime(byte hour)
+        void sayTime(byte hour)
         {
+            using (MemoryStream fileOut = new MemoryStream((byte[])Properties.Resources.ResourceManager.GetObject("yandex"+Convert.ToString(hour))))
+            using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
+                new SoundPlayer(gz).Play();
+            /*
+            using (GZipStream gz = new GZipStream(Properties.Resources.ResourceManager.GetStream("yandex"+hour.ToString()), CompressionMode.Decompress))
+                new SoundPlayer(gz).Play();
+            */
+            /*
             switch (hour)
             {
                 case 0:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._00))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex00))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 1:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._01))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex01))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 2:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._02))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex02))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 3:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._03))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex03))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 4:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._04))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex04))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 5:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._05))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex05))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 6:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._06))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex06))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 7:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._07))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex07))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 8:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._08))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex08))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 9:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._09))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex09))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 10:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._10))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex10))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 11:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._11))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex11))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 12:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._12))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex12))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 13:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._13))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex13))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 14:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._14))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex14))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 15:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._15))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex15))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 16:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._16))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex16))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 17:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._17))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex17))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 18:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._18))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex18))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 19:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._19))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex19))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 20:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._20))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex20))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 21:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._21))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex21))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 22:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._22))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex22))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 case 23:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources._23))
+                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex23))
                     using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
                         new SoundPlayer(gz).Play();
                     break;
                 default:
                     break;
             }
+            */
         }
         private void curTime()
         {
