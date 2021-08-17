@@ -3,195 +3,157 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Media;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace deskClock
+namespace DeskClock
 {
-    public partial class deskClock : Form
+    public partial class DeskClock : Form
     {
-        Timer timer = new Timer();
-        public deskClock()
+        [DllImport("user32.dll")] private static extern int SetWindowLong(IntPtr window, int index, int value);
+        [DllImport("user32.dll")] private static extern int GetWindowLong(IntPtr window, int index);
+        private const int GWL_EXSTYLE = -20;
+        private const int WS_EX_TOOLWINDOW = 0x00000080;
+
+        byte fontSize = 10;
+        bool modeHide = false;
+        bool modeSilence = false;
+        bool modeCalendar = false;
+        string position = "br";
+        readonly string voice = "yandex";
+        readonly Timer timer = new();
+        public DeskClock()
         {
             InitializeComponent();
-            byte fontSize = 14;
             this.Opacity = 0.75;
-            this.Size = new Size(fontSize * 9, fontSize + 8);
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width - this.Width, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height - this.Height);
-            //this.Location = new Point(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 2, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height / 2);
-            label1.Font = new Font("Tahoma", fontSize - 2, FontStyle.Bold);
-            label1.ForeColor = Color.FromArgb(204, 207, 255);
-            label1.Width = this.Width;
-            label1.Height = this.Height - 2;
-            label1.BackColor = Color.FromArgb(36, 48, 54);
-            label1.TextAlign = ContentAlignment.TopCenter;
-            label1.AutoSize = false;
-            label1.Location = new Point(0, 0);
-            progressBar1.Location = new Point(0, label1.Height);
-            progressBar1.Height = 2;
-            progressBar1.Width = label1.Width;
+            Label1.BackColor = Color.FromArgb(36, 48, 54);
+            Label1.ForeColor = Color.FromArgb(204, 207, 255);
+            CheckArgs();
+            CurTime();
+            this.Size = new Size(Convert.ToInt16(Label1.Text.Length * fontSize) + (2 * fontSize), fontSize * 2);
+            SetClockPosition();
+            Label1.Font = new Font("Tahoma", fontSize, FontStyle.Bold);
+            Label1.Width = this.Width;
+            Label1.Height = this.Height - 2;
+            Label1.TextAlign = ContentAlignment.TopCenter;
+            Label1.AutoSize = false;
+            Label1.Location = new Point(0, 0);
+            ProgressBar1.Location = new Point(0, Label1.Height);
+            ProgressBar1.Height = 2;
+            ProgressBar1.Width = Label1.Width;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        void Form1_Load(object sender, EventArgs e)
         {
-            curTime();
             timer.Interval = 1000;
-            timer.Tick += new EventHandler(updateTime);
+            timer.Tick += new EventHandler(UpdateTime);
             timer.Start();
+            if (modeHide)
+            {
+                this.ShowInTaskbar = false;
+                this.ShowIcon = false;
+                HideFromAltTab(this.Handle);
+            }
         }
 
-        void sayTime(byte hour)
+        public void SetClockPosition()
         {
-            using (MemoryStream fileOut = new MemoryStream((byte[])Properties.Resources.ResourceManager.GetObject("yandex"+Convert.ToString(hour))))
-            using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                new SoundPlayer(gz).Play();
-            /*
-            using (GZipStream gz = new GZipStream(Properties.Resources.ResourceManager.GetStream("yandex"+hour.ToString()), CompressionMode.Decompress))
-                new SoundPlayer(gz).Play();
-            */
-            /*
-            switch (hour)
+            this.StartPosition = FormStartPosition.Manual;
+            switch (position)
             {
-                case 0:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex00))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
+                case "tm": //top-middle
+                    this.Top = 0;
+                    this.Left = (Screen.PrimaryScreen.Bounds.Width - this.Width) / 2;
                     break;
-                case 1:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex01))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
+                case "bm": //bottom-middle
+                    this.Top = Screen.PrimaryScreen.Bounds.Height - (fontSize * 2);
+                    this.Left = (Screen.PrimaryScreen.Bounds.Width - this.Width) / 2;
                     break;
-                case 2:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex02))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
+                case "tr": //top-right
+                    this.Top = 0;
+                    this.Left = Screen.PrimaryScreen.Bounds.Width - this.Width;
                     break;
-                case 3:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex03))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
+                case "tl": //top-left
+                    this.Top = 0;
+                    this.Left = 0;
                     break;
-                case 4:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex04))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
+                case "br": //bottom-right
+                    this.Top = Screen.PrimaryScreen.Bounds.Height - (fontSize * 2);
+                    this.Left = Screen.PrimaryScreen.Bounds.Width - this.Width;
                     break;
-                case 5:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex05))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
+                case "bl": //bottom-left
+                    this.Top = Screen.PrimaryScreen.Bounds.Height - (fontSize * 2);
+                    this.Left = 0;
                     break;
-                case 6:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex06))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 7:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex07))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 8:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex08))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 9:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex09))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 10:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex10))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 11:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex11))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 12:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex12))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 13:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex13))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 14:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex14))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 15:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex15))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 16:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex16))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 17:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex17))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 18:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex18))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 19:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex19))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 20:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex20))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 21:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex21))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 22:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex22))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
-                    break;
-                case 23:
-                    using (MemoryStream fileOut = new MemoryStream(Properties.Resources.yandex23))
-                    using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        new SoundPlayer(gz).Play();
+                case "center": //center
+                    this.Top = (System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height - (fontSize * 2)) / 2;
+                    this.Left = (System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width - this.Width) / 2;
                     break;
                 default:
+                    MessageBox.Show("Неверно указано положение часов. Будет использована позиция по умолчанию (правый нижний угол).");
+                    this.Top = Screen.PrimaryScreen.Bounds.Height - (fontSize * 2);
+                    this.Left = Screen.PrimaryScreen.Bounds.Width - this.Width;
                     break;
             }
-            */
-        }
-        private void curTime()
-        {
-            progressBar1.Value = DateTime.Now.Second;
-            label1.Text = DateTime.Now.ToString("HH : mm : ss");
         }
 
-        private void updateTime(object sender, EventArgs e)
+        public void SayTime(byte hour)
         {
-            curTime();
-            if (DateTime.Now.Minute == 0 && DateTime.Now.Second == 0) sayTime(Convert.ToByte(DateTime.Now.Hour));
-
+            using MemoryStream fileHour = new((byte[])Properties.Resources.ResourceManager.GetObject(voice + Convert.ToString(hour)));
+            using GZipStream gzHour = new(fileHour, CompressionMode.Decompress);
+            new SoundPlayer(gzHour).Play();
         }
-        private void label1_MouseDoubleClick(object sender, MouseEventArgs e)
+        public void CurTime()
+        {
+            ProgressBar1.Value = DateTime.Now.Second;
+            if (modeCalendar) { Label1.Text = DateTime.Now.ToString("dd MMM, HH : mm : ss"); }
+            else { Label1.Text = DateTime.Now.ToString("HH : mm : ss"); }
+        }
+        public void UpdateTime(object sender, EventArgs e)
+        {
+            CurTime();
+            if (modeSilence == false && DateTime.Now.Second == 0 && DateTime.Now.Minute == 0) SayTime(Convert.ToByte(DateTime.Now.Hour));
+        }
+        public void Label1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Close();
+        }
+        public static void HideFromAltTab(IntPtr Handle)
+        {
+            SetWindowLong(Handle, GWL_EXSTYLE, GetWindowLong(Handle, GWL_EXSTYLE) | WS_EX_TOOLWINDOW);
+        }
+        public void Help()
+        {
+            MessageBox.Show(@"/hide - не отображать часы по ALT+TAB
+/silence - не издавать звуков
+/calendar - выводить число и месяц
+/size={размер} - задать размер шрифта (не более 255!)
+/colorf={цвет} - цвет текста в HEX-формате без символа #
+/colorb={цвет} - цвет фона в HEX-формате без символа #
+/position={положение} - положение часов на экране. {Положение} может принимать одно из следующих значений:
+    tr - верхний-правый угол экрана
+    tm - верхняя середина экрана
+    tl - верхний-левый угол экрана
+    center - центр экрана
+    br - нижний-правый угол экрана
+    bm - нижняя середина экрана
+    bl - нижний-левый угол экрана", "Дополнительные параметры запуска", MessageBoxButtons.OK, MessageBoxIcon.Question);
+            Close();
+        }
+        public void CheckArgs()
+        {
+            var cmdArgs = Environment.GetCommandLineArgs();
+            foreach (var arg in cmdArgs)
+            {
+                if (arg.Equals("/help") || arg.Equals("/h") || arg.Equals("-help") || arg.Equals("-h") || arg.Equals("/?") || arg.Equals("-?")) { Help(); }
+                if (arg.Equals("/hide")) { modeHide = true; }
+                if (arg.Equals("/silence")) { modeSilence = true; }
+                if (arg.Equals("/calendar")) { modeCalendar = true; }
+                if (arg.StartsWith("/position")) { position = Convert.ToString(arg.Split("=")[1]); }
+                if (arg.StartsWith("/size")) { fontSize = Convert.ToByte(arg.Split("=")[1]); }
+                if (arg.StartsWith("/colorf")) { Label1.ForeColor = System.Drawing.ColorTranslator.FromHtml("#" + Convert.ToString(arg.Split("=")[1])); }
+                if (arg.StartsWith("/colorb")) { Label1.BackColor = System.Drawing.ColorTranslator.FromHtml("#" + Convert.ToString(arg.Split("=")[1])); }
+            }
         }
     }
 }

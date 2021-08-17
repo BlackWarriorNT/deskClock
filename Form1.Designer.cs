@@ -1,7 +1,7 @@
 ﻿
-namespace deskClock
+namespace DeskClock
 {
-    partial class deskClock
+    partial class DeskClock
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,53 +29,55 @@ namespace deskClock
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(deskClock));
-            this.label1 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeskClock));
+            this.Label1 = new System.Windows.Forms.Label();
+            this.ProgressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
-            // label1
+            // Label1
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(8, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(224, 37);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "время";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.label1_MouseDoubleClick);
+            this.Label1.Font = new System.Drawing.Font("Tahoma", 8, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.Label1.Location = new System.Drawing.Point(0, 0);
+            this.Label1.Margin = new System.Windows.Forms.Padding(0);
+            this.Label1.Name = "Label1";
+            this.Label1.Size = new System.Drawing.Size(120, 8);
+            this.Label1.TabIndex = 0;
+            this.Label1.Text = "время";
+            this.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.Label1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Label1_MouseDoubleClick);
             // 
-            // progressBar1
+            // ProgressBar1
             // 
-            this.progressBar1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.progressBar1.Location = new System.Drawing.Point(8, 46);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(0);
-            this.progressBar1.Maximum = 60;
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(224, 10);
-            this.progressBar1.Step = 1;
-            this.progressBar1.TabIndex = 1;
+            this.ProgressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ProgressBar1.BackColor = System.Drawing.Color.Gray;
+            this.ProgressBar1.Location = new System.Drawing.Point(0, 8);
+            this.ProgressBar1.Margin = new System.Windows.Forms.Padding(0);
+            this.ProgressBar1.Maximum = 60;
+            this.ProgressBar1.Name = "ProgressBar1";
+            this.ProgressBar1.Size = new System.Drawing.Size(120, 2);
+            this.ProgressBar1.Step = 1;
+            this.ProgressBar1.TabIndex = 1;
             // 
-            // deskClock
+            // DeskClock
             // 
             this.AccessibleDescription = "Desktop widget clock";
-            this.AccessibleName = "deskClock";
+            this.AccessibleName = "DeskClock";
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Clock;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(241, 67);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.progressBar1);
+            this.ClientSize = new System.Drawing.Size(120, 10);
+            this.Controls.Add(this.Label1);
+            this.Controls.Add(this.ProgressBar1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(10, 5);
-            this.Name = "deskClock";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "deskClock";
+            this.MinimumSize = new System.Drawing.Size(120, 10);
+            this.Name = "DeskClock";
+            //this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "DeskClock";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
@@ -84,8 +86,8 @@ namespace deskClock
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label Label1;
+        private System.Windows.Forms.ProgressBar ProgressBar1;
     }
 }
 

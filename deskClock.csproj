@@ -7,6 +7,12 @@
     <Authors>AmoFess</Authors>
     <Description>Виджет часов</Description>
     <NeutralLanguage>ru</NeutralLanguage>
+    <ApplicationIcon>DeskClock.ico</ApplicationIcon>
+    <LangVersion>9.0</LangVersion>
+    <StartupObject>DeskClock.Program</StartupObject>
+    <RootNamespace>DeskClock</RootNamespace>
+    <AssemblyName>DeskClock</AssemblyName>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

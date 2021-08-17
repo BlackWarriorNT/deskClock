@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace deskClock
+namespace DeskClock
 {
     static class Program
     {
@@ -17,7 +14,7 @@ namespace deskClock
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new deskClock());
+            Application.Run(new DeskClock());
         }
     }
 }

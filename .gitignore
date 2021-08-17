@@ -9,8 +9,8 @@
 *.user
 *.userosscache
 *.sln.docstates
-!deskClock.exe
-!deskClock.zip
+!DeskClock.exe
+!DeskClock.zip
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
