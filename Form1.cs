@@ -20,6 +20,7 @@ namespace DeskClock
         bool modeSilence = false;
         bool modeCalendar = false;
         string position = "br";
+        readonly string configFile = "deskClock.ini";
         readonly string voice = "yandex";
         readonly Timer timer = new();
         public DeskClock()
@@ -29,6 +30,20 @@ namespace DeskClock
             Label1.BackColor = Color.FromArgb(36, 48, 54);
             Label1.ForeColor = Color.FromArgb(204, 207, 255);
             CheckArgs();
+            if (File.Exists(configFile)) {
+                string[] lines = File.ReadAllLines(configFile);
+                foreach (string line in lines)
+                {
+                    if (line.Split(" = ")[0] == "fontSize") { fontSize = Convert.ToByte(line.Split(" = ")[1]); }
+                    if (line.Split(" = ")[0] == "modeHide") { modeHide = Convert.ToBoolean(line.Split(" = ")[1]); }
+                    if (line.Split(" = ")[0] == "modeSilence") { modeSilence = Convert.ToBoolean(line.Split(" = ")[1]); }
+                    if (line.Split(" = ")[0] == "modeCalendar") { modeCalendar = Convert.ToBoolean(line.Split(" = ")[1]); }
+                    if (line.Split(" = ")[0] == "position") { position = line.Split(" = ")[1]; }
+                    if (line.Split(" = ")[0] == "colorf") { Label1.ForeColor = HexToColor(line.Split(" = ")[1]); }
+                    if (line.Split(" = ")[0] == "colorb") { Label1.BackColor = HexToColor(line.Split(" = ")[1]); }
+                }
+            }
+            //Close();
             CurTime();
             this.Size = new Size(Convert.ToInt16(Label1.Text.Length * fontSize) + (2 * fontSize), fontSize * 2);
             SetClockPosition();
@@ -140,6 +155,14 @@ namespace DeskClock
     bl - нижний-левый угол экрана", "Дополнительные параметры запуска", MessageBoxButtons.OK, MessageBoxIcon.Question);
             Close();
         }
+
+        public Color HexToColor (string ColorToConvert) {
+            //ColorConverter(System.Drawing.ColorTranslator.FromHtml("#" + Color));
+            //string x = Convert.ToString(System.Drawing.ColorTranslator.FromHtml("#" + Color));
+            //Convert.ToString(System.Drawing.ColorTranslator.FromHtml("#" + Color));
+            return (System.Drawing.ColorTranslator.FromHtml("#" + ColorToConvert));
+        }
+
         public void CheckArgs()
         {
             var cmdArgs = Environment.GetCommandLineArgs();
@@ -151,8 +174,8 @@ namespace DeskClock
                 if (arg.Equals("/calendar")) { modeCalendar = true; }
                 if (arg.StartsWith("/position")) { position = Convert.ToString(arg.Split("=")[1]); }
                 if (arg.StartsWith("/size")) { fontSize = Convert.ToByte(arg.Split("=")[1]); }
-                if (arg.StartsWith("/colorf")) { Label1.ForeColor = System.Drawing.ColorTranslator.FromHtml("#" + Convert.ToString(arg.Split("=")[1])); }
-                if (arg.StartsWith("/colorb")) { Label1.BackColor = System.Drawing.ColorTranslator.FromHtml("#" + Convert.ToString(arg.Split("=")[1])); }
+                if (arg.StartsWith("/colorf")) { Label1.ForeColor = HexToColor(arg.Split("=")[1]); }
+                if (arg.StartsWith("/colorb")) { Label1.BackColor = HexToColor(arg.Split("=")[1]); }
             }
         }
     }
