@@ -19,6 +19,7 @@ namespace DeskClock
         bool modeHide = false;
         bool modeSilence = false;
         bool modeCalendar = false;
+        bool saveConfig = false;
         string position = "br";
         readonly string configFile = "deskClock.ini";
         readonly string voice = "yandex";
@@ -43,7 +44,18 @@ namespace DeskClock
                     if (line.Split(" = ")[0] == "colorb") { Label1.BackColor = HexToColor(line.Split(" = ")[1]); }
                 }
             }
-            //Close();
+            if (saveConfig)
+            {
+                TextWriter tw = new StreamWriter(configFile);
+                tw.WriteLine("fontSize = " + fontSize);
+                tw.WriteLine("modeHide = " + modeHide);
+                tw.WriteLine("modeSilence = " + modeSilence);
+                tw.WriteLine("modeCalendar = " + modeCalendar);
+                tw.WriteLine("position = " + position);
+                tw.WriteLine("colorf = " + ColorToHex(Label1.ForeColor));
+                tw.WriteLine("colorb = " + ColorToHex(Label1.BackColor));
+                tw.Close();
+            }
             CurTime();
             this.Size = new Size(Convert.ToInt16(Label1.Text.Length * fontSize) + (2 * fontSize), fontSize * 2);
             SetClockPosition();
@@ -152,17 +164,18 @@ namespace DeskClock
     center - центр экрана
     br - нижний-правый угол экрана
     bm - нижняя середина экрана
-    bl - нижний-левый угол экрана", "Дополнительные параметры запуска", MessageBoxButtons.OK, MessageBoxIcon.Question);
+    bl - нижний-левый угол экрана
+/save - сохранить все настройки в файл", "Дополнительные параметры запуска", MessageBoxButtons.OK, MessageBoxIcon.Question);
             Close();
         }
 
         public Color HexToColor (string ColorToConvert) {
-            //ColorConverter(System.Drawing.ColorTranslator.FromHtml("#" + Color));
-            //string x = Convert.ToString(System.Drawing.ColorTranslator.FromHtml("#" + Color));
-            //Convert.ToString(System.Drawing.ColorTranslator.FromHtml("#" + Color));
             return (System.Drawing.ColorTranslator.FromHtml("#" + ColorToConvert));
         }
-
+        public string ColorToHex(System.Drawing.Color c)
+        {
+            return c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
+        }
         public void CheckArgs()
         {
             var cmdArgs = Environment.GetCommandLineArgs();
@@ -172,6 +185,7 @@ namespace DeskClock
                 if (arg.Equals("/hide")) { modeHide = true; }
                 if (arg.Equals("/silence")) { modeSilence = true; }
                 if (arg.Equals("/calendar")) { modeCalendar = true; }
+                if (arg.Equals("/save")) { saveConfig = true; }
                 if (arg.StartsWith("/position")) { position = Convert.ToString(arg.Split("=")[1]); }
                 if (arg.StartsWith("/size")) { fontSize = Convert.ToByte(arg.Split("=")[1]); }
                 if (arg.StartsWith("/colorf")) { Label1.ForeColor = HexToColor(arg.Split("=")[1]); }
